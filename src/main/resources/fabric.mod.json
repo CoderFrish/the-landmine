@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "the_landmine",
+  "version": "${version}",
+  "name": "The Landmine",
+  "description": "作者打战地打昏的时候，灵机一动写出来的东西。",
+  "authors": [
+    "CoderFrish"
+  ],
+  "contact": {
+    "homepage": "https://coderfrish.github.io",
+    "sources": "https://github.com/CoderFrish/the-landmine"
+  },
+  "license": "MIT",
+  "icon": "assets/the_landmine/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "value": "me.coderfrish.mods.the_landmine.TheLandmineMod",
+        "adapter": "kotlin"
+      }
+    ],
+    "fabric-datagen": [
+      {
+        "value": "me.coderfrish.mods.the_landmine.generator.TheLandmineGenerator",
+        "adapter": "kotlin"
+      }
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.19.2",
+    "minecraft": "~26.1.2",
+    "java": ">=25",
+    "fabric-api": "*",
+    "fabric-language-kotlin": "*"
+  }
+}

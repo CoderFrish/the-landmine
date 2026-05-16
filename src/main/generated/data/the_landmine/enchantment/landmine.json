@@ -1,0 +1,48 @@
+{
+  "anvil_cost": 8,
+  "description": {
+    "translate": "enchantment.the_landmine.landmine"
+  },
+  "effects": {
+    "minecraft:post_attack": [
+      {
+        "affected": "damaging_entity",
+        "effect": {
+          "type": "the_landmine:landmine_boom_effect",
+          "amount": {
+            "type": "minecraft:linear",
+            "base": 1.0,
+            "per_level_above_first": 1.0
+          }
+        },
+        "enchanted": "attacker"
+      }
+    ],
+    "minecraft:tick": [
+      {
+        "effect": {
+          "type": "the_landmine:landmine_speed_effect",
+          "amount": {
+            "type": "minecraft:linear",
+            "base": 1.0,
+            "per_level_above_first": 1.0
+          }
+        }
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 50,
+    "per_level_above_first": 0
+  },
+  "max_level": 1,
+  "min_cost": {
+    "base": 25,
+    "per_level_above_first": 0
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": "#minecraft:spears",
+  "weight": 1
+}
