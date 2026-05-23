@@ -3,7 +3,9 @@ package me.coderfrish.mods.the_landmine.effect
 import com.mojang.serialization.MapCodec
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.entity.Entity
+import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.enchantment.EnchantedItemInUse
 import net.minecraft.world.item.enchantment.LevelBasedValue
 import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect
@@ -28,13 +30,16 @@ data class LandmineBoomEffect(private val amount: LevelBasedValue): EnchantmentE
     }
 
     override fun apply(
-        serverLevel: ServerLevel,
-        enchantmentLevel: Int,
+        serverLevel: ServerLevel,        enchantmentLevel: Int,
+
         item: EnchantedItemInUse,
         entity: Entity,
         position: Vec3
     ) {
-        boom(serverLevel, entity)
+        if (entity is ServerPlayer) {
+            boom(serverLevel, entity)
+            item.itemStack().hurtAndBreak(item.itemStack().maxDamage, serverLevel, entity) {}
+        }
     }
 
     override fun codec(): MapCodec<out EnchantmentEntityEffect> = CODEC

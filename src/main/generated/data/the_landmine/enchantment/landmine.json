@@ -17,20 +17,9 @@
         },
         "enchanted": "attacker"
       }
-    ],
-    "minecraft:tick": [
-      {
-        "effect": {
-          "type": "the_landmine:landmine_speed_effect",
-          "amount": {
-            "type": "minecraft:linear",
-            "base": 1.0,
-            "per_level_above_first": 1.0
-          }
-        }
-      }
     ]
   },
+  "exclusive_set": "#the_landmine:landmine_excluives",
   "max_cost": {
     "base": 50,
     "per_level_above_first": 0

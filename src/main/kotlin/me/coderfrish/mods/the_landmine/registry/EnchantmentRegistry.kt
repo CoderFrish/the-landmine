@@ -1,12 +1,13 @@
 package me.coderfrish.mods.the_landmine.registry
 
 import me.coderfrish.mods.the_landmine.effect.LandmineBoomEffect
-import me.coderfrish.mods.the_landmine.effect.LandmineSpeedEffect
+import me.coderfrish.mods.the_landmine.provider.EnchantmentTagsProvider
 import net.minecraft.core.registries.Registries
 import net.minecraft.core.registries.Registries.ITEM
 import net.minecraft.data.worldgen.BootstrapContext
 import net.minecraft.resources.Identifier
 import net.minecraft.resources.ResourceKey
+import net.minecraft.tags.EnchantmentTags
 import net.minecraft.tags.ItemTags
 import net.minecraft.world.entity.EquipmentSlotGroup
 import net.minecraft.world.item.enchantment.Enchantment
@@ -20,6 +21,7 @@ internal object EnchantmentRegistry {
 
     fun register(context: BootstrapContext<Enchantment>) {
         val items = context.lookup(ITEM)
+        val enchantments = context.lookup<Enchantment>(Registries.ENCHANTMENT)
 
         val landmine = Enchantment.enchantment(
             Enchantment.definition(
@@ -28,14 +30,11 @@ internal object EnchantmentRegistry {
                 EquipmentSlotGroup.MAINHAND
             )
         ).withEffect(
-            EnchantmentEffectComponents.TICK,
-            LandmineSpeedEffect(LevelBasedValue.perLevel(1.0F))
-        ).withEffect(
             EnchantmentEffectComponents.POST_ATTACK,
             EnchantmentTarget.ATTACKER,
             EnchantmentTarget.DAMAGING_ENTITY,
             LandmineBoomEffect(LevelBasedValue.perLevel(1.0F))
-        )
+        ).exclusiveWith(enchantments.getOrThrow(EnchantmentTagsProvider.landmine_excluives))
 
         context.register(EnchantmentRegistry.landmine, landmine.build(landmine_id))
     }
